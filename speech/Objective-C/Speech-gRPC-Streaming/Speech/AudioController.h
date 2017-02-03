@@ -18,7 +18,7 @@
 
 @protocol AudioControllerDelegate <NSObject>
 
-- (void) processSampleData:(NSData *) data;
+- (void) processSampleData:(NSData *) data withMicDelay:(NSTimeInterval)micDelay;
 
 @end
 
@@ -28,7 +28,7 @@
 
 @property (nonatomic, weak) id<AudioControllerDelegate> delegate;
 
-- (OSStatus) prepareWithSampleRate:(double) sampleRate;
+- (OSStatus) prepareWithSampleRate:(double)sampleRate;
 - (OSStatus) start;
 - (OSStatus) stop;
 

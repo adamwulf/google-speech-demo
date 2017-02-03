@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6593B094B9621D063F0C44A6 /* libPods-Speech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8285D81C2BF2654DB60650 /* libPods-Speech.a */; };
+		C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D43B1E4533B6007B8D52 /* MMDragonEar.m */; };
+		C527D4411E45428C007B8D52 /* MMDragonPhrase.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4401E45428C007B8D52 /* MMDragonPhrase.m */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -23,6 +25,11 @@
 		5E83ACE29B0D0DF0085BA8F2 /* Pods-Speech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speech.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speech/Pods-Speech.release.xcconfig"; sourceTree = "<group>"; };
 		6C682F8DD9C94E41979FE816 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C2D2368DBC8898A52FE6113B /* Pods-Speech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Speech/Pods-Speech.debug.xcconfig"; sourceTree = "<group>"; };
+		C527D43A1E4533B6007B8D52 /* MMDragonEar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonEar.h; sourceTree = "<group>"; };
+		C527D43B1E4533B6007B8D52 /* MMDragonEar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonEar.m; sourceTree = "<group>"; };
+		C527D43E1E4534DA007B8D52 /* MMDragonEarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonEarDelegate.h; sourceTree = "<group>"; };
+		C527D43F1E45428C007B8D52 /* MMDragonPhrase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonPhrase.h; sourceTree = "<group>"; };
+		C527D4401E45428C007B8D52 /* MMDragonPhrase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonPhrase.m; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +69,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C527D43D1E4533BA007B8D52 /* DragonEar */ = {
+			isa = PBXGroup;
+			children = (
+				C527D43A1E4533B6007B8D52 /* MMDragonEar.h */,
+				C527D43B1E4533B6007B8D52 /* MMDragonEar.m */,
+				C527D43E1E4534DA007B8D52 /* MMDragonEarDelegate.h */,
+				C527D43F1E45428C007B8D52 /* MMDragonPhrase.h */,
+				C527D4401E45428C007B8D52 /* MMDragonPhrase.m */,
+			);
+			name = DragonEar;
+			sourceTree = "<group>";
+		};
 		D34C17C01C948F5700D69BCA = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +102,7 @@
 		D34C17CB1C948F5700D69BCA /* Speech */ = {
 			isa = PBXGroup;
 			children = (
+				C527D43D1E4533BA007B8D52 /* DragonEar */,
 				D34C17CF1C948F5700D69BCA /* AppDelegate.h */,
 				D34C17D01C948F5700D69BCA /* AppDelegate.m */,
 				D34C17D81C948F5800D69BCA /* Assets.xcassets */,
@@ -242,9 +262,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D379BE381C99FEC70049D06F /* AudioController.m in Sources */,
+				C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */,
 				D392D9891C94938F002F5132 /* ViewController.m in Sources */,
 				D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */,
 				D34C17CE1C948F5700D69BCA /* main.m in Sources */,
+				C527D4411E45428C007B8D52 /* MMDragonPhrase.m in Sources */,
 				D3FFBC371C96208B00268A5F /* SpeechRecognitionService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

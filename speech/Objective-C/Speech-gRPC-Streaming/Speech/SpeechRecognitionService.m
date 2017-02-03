@@ -52,7 +52,7 @@
     _writer = [[GRXBufferedPipe alloc] init];
     _call = [_client RPCToStreamingRecognizeWithRequestsWriter:_writer
                                          eventHandler:^(BOOL done, StreamingRecognizeResponse *response, NSError *error) {
-                                           completion(response, error);
+                                           completion(NO, response, error);
                                          }];
 
     // authenticate using an API key obtained from the Google Cloud Console
@@ -81,6 +81,8 @@
     streamingRecognizeRequest.streamingConfig = streamingRecognitionConfig;
 
     [_writer writeValue:streamingRecognizeRequest];
+
+      completion(YES, nil, nil);
   }
 
   // send a request message containing the audio data

@@ -90,7 +90,7 @@ static OSStatus recordingCallback(void *inRefCon,
   NSData *data = [[NSData alloc] initWithBytes:bufferList->mBuffers[0].mData
                                         length:bufferList->mBuffers[0].mDataByteSize];
   dispatch_async(dispatch_get_main_queue(), ^{
-    [audioController.delegate processSampleData:data];
+      [audioController.delegate processSampleData:data withMicDelay:[AVAudioSession sharedInstance].inputLatency];
   });
 
   return noErr;

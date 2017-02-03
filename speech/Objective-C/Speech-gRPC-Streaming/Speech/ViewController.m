@@ -20,10 +20,13 @@
 #import "AudioController.h"
 #import "SpeechRecognitionService.h"
 #import "google/cloud/speech/v1beta1/CloudSpeech.pbrpc.h"
+#import "MMDragonEar.h"
+#import "MMDragonPhrase.h"
+#import "MMDragonEarDelegate.h"
 
 #define SAMPLE_RATE 16000.0f
 
-@interface ViewController () <AudioControllerDelegate>
+@interface ViewController () <MMDragonEarDelegate>
 @property (nonatomic, strong) IBOutlet UITextView *textView;
 @property (nonatomic, strong) NSMutableData *audioData;
 @end
@@ -32,64 +35,53 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  [AudioController sharedInstance].delegate = self;
+    
+    [[MMDragonEar sharedInstance] setDelgate:self];
 }
 
 - (IBAction)recordAudio:(id)sender {
-  AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-  [audioSession setCategory:AVAudioSessionCategoryRecord error:nil];
-
-  _audioData = [[NSMutableData alloc] init];
-  [[AudioController sharedInstance] prepareWithSampleRate:SAMPLE_RATE];
-  [[SpeechRecognitionService sharedInstance] setSampleRate:SAMPLE_RATE];
-  [[AudioController sharedInstance] start];
+    [[MMDragonEar sharedInstance] setListening:YES];
 }
 
 - (IBAction)stopAudio:(id)sender {
-  [[AudioController sharedInstance] stop];
-  [[SpeechRecognitionService sharedInstance] stopStreaming];
+    [[MMDragonEar sharedInstance] setListening:NO];
 }
 
-- (void) processSampleData:(NSData *)data
-{
-  [self.audioData appendData:data];
-  NSInteger frameCount = [data length] / 2;
-  int16_t *samples = (int16_t *) [data bytes];
-  int64_t sum = 0;
-  for (int i = 0; i < frameCount; i++) {
-    sum += abs(samples[i]);
-  }
-  NSLog(@"audio %d %d", (int) frameCount, (int) (sum * 1.0 / frameCount));
+#pragma mark - MMDragonEarDelegate
 
-  // We recommend sending samples in 100ms chunks
-  int chunk_size = 0.1 /* seconds/chunk */ * SAMPLE_RATE * 2 /* bytes/sample */ ; /* bytes/chunk */
+-(void) willBeginProcessingAudio:(MMDragonEar *)dragonEar{
+    
+}
 
-  if ([self.audioData length] > chunk_size) {
-    NSLog(@"SENDING");
-    [[SpeechRecognitionService sharedInstance] streamAudioData:self.audioData
-                                                withCompletion:^(StreamingRecognizeResponse *response, NSError *error) {
-                                                  if (error) {
-                                                    NSLog(@"ERROR: %@", error);
-                                                    _textView.text = [error localizedDescription];
-                                                    [self stopAudio:nil];
-                                                  } else if (response) {
-                                                    BOOL finished = NO;
-                                                    NSLog(@"RESPONSE: %@", response);
-                                                    for (StreamingRecognitionResult *result in response.resultsArray) {
-                                                      if (result.isFinal) {
-                                                        finished = YES;
-                                                      }
-                                                    }
-                                                    _textView.text = [response description];
-                                                    if (finished) {
-                                                      [self stopAudio:nil];
-                                                    }
-                                                  }
-                                                }
-     ];
-    self.audioData = [[NSMutableData alloc] init];
-  }
+-(void) didEndProcessingAudio:(MMDragonEar *)dragonEar{
+    
+}
+
+-(void) dragonEar:(MMDragonEar *)dragonEar errorProcessingAudio:(NSError *)error{
+    _textView.text = [error localizedDescription];
+}
+
+-(void) dragonEar:(MMDragonEar*)dragonEar didHearResponse:(MMDragonPhrase*)response{
+    NSLog(@"RESPONSE:");
+    NSLog(@" - result (%.2f, %d)", response.bestResult.stability, response.bestResult.isFinal);
+    SpeechRecognitionAlternative* alt = [response.bestResult.alternativesArray firstObject];
+
+    NSLog(@" - - alt (%.2f, %@)", alt.confidence, alt.transcript);
+
+    if([response isComplete]){
+        
+        NSArray<NSString*>* userDocumentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString* docPath = [userDocumentsPaths objectAtIndex:0];
+        NSString* outputFile = [[docPath stringByAppendingPathComponent:[response identifier]] stringByAppendingPathExtension:@"plist"];
+
+        if([NSKeyedArchiver archiveRootObject:response toFile:outputFile]){
+            NSLog(@"wrote to: %@", outputFile);
+        }else{
+            NSLog(@"failed to write to: %@", outputFile);
+        }
+    }
+    
+    _textView.text = [response description];
 }
 
 @end

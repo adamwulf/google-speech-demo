@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 #import "google/cloud/speech/v1beta1/CloudSpeech.pbrpc.h"
 
-typedef void (^SpeechRecognitionCompletionHandler)(StreamingRecognizeResponse *object, NSError *error);
+typedef void (^SpeechRecognitionCompletionHandler)(BOOL didInitializeStream, StreamingRecognizeResponse *object, NSError *error);
 
 @interface SpeechRecognitionService : NSObject
 
