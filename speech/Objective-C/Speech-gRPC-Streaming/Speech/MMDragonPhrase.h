@@ -12,7 +12,7 @@
 
 @interface MMDragonPhrase : NSObject<NSSecureCoding>
 
--(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay andFlightDelay:(NSTimeInterval)flightDelay;
+-(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay andFlightDelay:(NSTimeInterval)flightDelay atTime:(NSTimeInterval)timeOfResponse;
 
 @property (nonatomic, readonly, getter=isComplete) BOOL complete;
 @property (nonatomic, readonly) NSString *identifier;

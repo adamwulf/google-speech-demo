@@ -99,7 +99,7 @@
                                                                 _inFlightPhrase = [[MMDragonPhrase alloc] init];
                                                             }
                                                             
-                                                            [_inFlightPhrase updateWithStreamingResponse:response withMicDelay:micDelay andFlightDelay:flightDelay];
+                                                            [_inFlightPhrase updateWithStreamingResponse:response withMicDelay:micDelay andFlightDelay:flightDelay atTime:[NSDate timeIntervalSinceReferenceDate]];
                                                             
                                                             [[self delgate] dragonEar:self didHearResponse:_inFlightPhrase];
 
