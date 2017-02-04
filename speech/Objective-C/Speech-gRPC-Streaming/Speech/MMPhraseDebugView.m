@@ -12,6 +12,7 @@
 
 #define kRowHeight 20
 #define kWidthForTimestamp 80
+#define kWidthForConfidence 80
 
 @implementation MMPhraseDebugView{
     UIFont* font;
@@ -99,6 +100,8 @@
         [[UIBezierPath bezierPathWithRect:line] fill];
         
         widthSoFar += [width floatValue];
+        
+        widthSoFar += kWidthForConfidence;
     }
     
     
@@ -117,13 +120,19 @@
         NSArray<NSArray<NSDictionary*>*>* columns = event[@"response"];
         
         CGFloat widthSoFar = kWidthForTimestamp;
+        
         for (NSInteger index = 0; index < [columns count]; index++) {
             CGFloat columnWidth = [columnWidths[index] floatValue];
             NSArray* column = columns[index];
             NSDictionary* mostProbableResult = [column firstObject];
             NSString* text = mostProbableResult[@"text"];
+            NSString* confidence = [mostProbableResult[@"confidence"] stringValue];
             
             if(text){
+                [confidence drawAtPoint:CGPointMake(widthSoFar, y + 4) withAttributes:attributes];
+
+                widthSoFar += kWidthForConfidence;
+                
                 [text drawAtPoint:CGPointMake(widthSoFar, y + 4) withAttributes:attributes];
             }
             

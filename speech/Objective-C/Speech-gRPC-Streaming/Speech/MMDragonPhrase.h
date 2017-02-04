@@ -23,4 +23,6 @@
 
 -(NSArray<NSDictionary*>*) debugEventData;
 
+-(BOOL) hasResults;
+
 @end

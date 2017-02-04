@@ -112,6 +112,20 @@
     return nil;
 }
 
+-(BOOL) hasResults{
+    return [_phraseEvents reduceToBool:^BOOL(id event, NSUInteger index, BOOL accum) {
+        if(event[@"response"]){
+            StreamingRecognizeResponse* recentResponse = event[@"response"];
+            
+            return accum || [[recentResponse resultsArray] reduceToInteger:^NSInteger(StreamingRecognitionResult *obj, NSUInteger index, NSInteger accum) {
+                return [[obj alternativesArray] count];
+            }];
+        }
+        
+        return accum;
+    }];
+}
+
 #pragma mark - NSSecureCoding
 
 + (BOOL)supportsSecureCoding{

@@ -87,7 +87,7 @@
         }
     }
     
-    if([response isComplete]){
+    if([response hasResults]){
         [_debugView setPhrase:response];
         
         [_debugView setNeedsDisplay];
