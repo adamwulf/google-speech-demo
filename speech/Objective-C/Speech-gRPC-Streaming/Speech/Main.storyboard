@@ -22,57 +22,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJY-83-MIx">
-                                <rect key="frame" x="412" y="70" width="200" height="60"/>
+                                <rect key="frame" x="412" y="70" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.75" green="0.75" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Ob5-s4-nYg"/>
-                                    <constraint firstAttribute="height" constant="30" id="QTK-6F-b35"/>
+                                    <constraint firstAttribute="height" constant="50" id="QTK-6F-b35"/>
                                     <constraint firstAttribute="width" constant="200" id="aXK-qO-hb0"/>
                                 </constraints>
                                 <state key="normal" title="Start Streaming"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="QTK-6F-b35"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UMB-tC-1sV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgH-jh-Nuq">
-                                <rect key="frame" x="620" y="70" width="200" height="60"/>
+                                <rect key="frame" x="620" y="70" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.75" green="0.75" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6lu-81-t2K"/>
+                                    <constraint firstAttribute="height" constant="50" id="6lu-81-t2K"/>
                                     <constraint firstAttribute="width" constant="200" id="8b8-bw-kQK"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="kpU-Gc-YS7"/>
                                 </constraints>
                                 <state key="normal" title="Stop Streaming"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="6lu-81-t2K"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="stopAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dib-We-StL"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hsn-Bu-J4A">
-                                <rect key="frame" x="0.0" y="150" width="1024" height="1216"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-cq-gob" customClass="MMPhraseDebugView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1216"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="dMQ-cq-gob" firstAttribute="top" secondItem="Hsn-Bu-J4A" secondAttribute="top" id="15T-pE-gzD"/>
-                                    <constraint firstAttribute="trailing" secondItem="dMQ-cq-gob" secondAttribute="trailing" id="3WL-KJ-5rT"/>
-                                    <constraint firstAttribute="bottom" secondItem="dMQ-cq-gob" secondAttribute="bottom" id="9Hl-N1-Z6m"/>
-                                    <constraint firstItem="dMQ-cq-gob" firstAttribute="centerY" secondItem="Hsn-Bu-J4A" secondAttribute="centerY" id="C3P-xz-oOD"/>
-                                    <constraint firstItem="dMQ-cq-gob" firstAttribute="leading" secondItem="Hsn-Bu-J4A" secondAttribute="leading" id="dxK-3A-Hc1"/>
-                                    <constraint firstItem="dMQ-cq-gob" firstAttribute="centerX" secondItem="Hsn-Bu-J4A" secondAttribute="centerX" id="spf-QN-uqC"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="140" width="1024" height="1226"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -96,6 +70,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="1366"/>
                     <connections>
+                        <outlet property="scrollView" destination="Hsn-Bu-J4A" id="UG9-dv-h2F"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="I19-bM-Qp4"/>
                     </connections>
                 </viewController>

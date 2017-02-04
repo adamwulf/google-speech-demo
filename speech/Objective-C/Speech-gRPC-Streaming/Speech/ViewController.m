@@ -23,11 +23,13 @@
 #import "MMDragonEar.h"
 #import "MMDragonPhrase.h"
 #import "MMDragonEarDelegate.h"
+#import "MMPhraseDebugView.h"
 
 #define SAMPLE_RATE 16000.0f
 
 @interface ViewController () <MMDragonEarDelegate>
-@property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (nonatomic, strong) MMPhraseDebugView *debugView;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableData *audioData;
 @end
 
@@ -35,6 +37,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
+    _debugView = [[MMPhraseDebugView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    
+    [_scrollView addSubview:_debugView];
     
     [[MMDragonEar sharedInstance] setDelgate:self];
 }
@@ -58,7 +64,7 @@
 }
 
 -(void) dragonEar:(MMDragonEar *)dragonEar errorProcessingAudio:(NSError *)error{
-    _textView.text = [error localizedDescription];
+    NSLog(@"ERROR: %@", error);
 }
 
 -(void) dragonEar:(MMDragonEar*)dragonEar didHearResponse:(MMDragonPhrase*)response{
@@ -81,7 +87,17 @@
         }
     }
     
-    _textView.text = [response description];
+    if([response isComplete]){
+        [_debugView setPhrase:response];
+        
+        [_debugView setNeedsDisplay];
+        [[_debugView superview] setNeedsLayout];
+
+        CGSize size = [_debugView intrinsicContentSize];
+        
+        [_debugView setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [_scrollView setContentSize:size];
+    }
 }
 
 @end

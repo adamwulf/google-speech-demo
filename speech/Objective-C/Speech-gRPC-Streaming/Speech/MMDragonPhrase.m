@@ -9,6 +9,7 @@
 #import "MMDragonPhrase.h"
 #import "SpeechRecognitionService.h"
 #import "NSArray+MapReduce.h"
+#import "NSArray+Helper.h"
 
 @implementation MMDragonPhrase{
     NSMutableArray* _phraseEvents;
@@ -34,7 +35,7 @@
 }
 
 -(NSArray<NSDictionary*>*)debugEventData{
-    return [_phraseEvents map:^id(id obj, NSUInteger index) {
+    NSArray<NSDictionary*>* ret = [_phraseEvents map:^id(id obj, NSUInteger index) {
         if(obj[@"response"]){
             
             NSMutableDictionary* mut = [obj mutableCopy];
@@ -46,6 +47,20 @@
         
         return obj;
     }];
+    
+    NSInteger indexOfFirstResponseEvent = [ret reduceToInteger:^NSInteger(NSDictionary *obj, NSUInteger index, NSInteger accum) {
+        if(!accum && [obj[@"response"] count]){
+            return index;
+        }
+        
+        return accum;
+    }];
+    
+    if(indexOfFirstResponseEvent > 0){
+        indexOfFirstResponseEvent -= 1;
+    }
+    
+    return [ret objectsFromIndex:indexOfFirstResponseEvent];
 }
 
 -(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay atTime:(NSTimeInterval)timestampOfResponse{
