@@ -10,6 +10,9 @@
 		6593B094B9621D063F0C44A6 /* libPods-Speech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8285D81C2BF2654DB60650 /* libPods-Speech.a */; };
 		C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D43B1E4533B6007B8D52 /* MMDragonEar.m */; };
 		C527D4411E45428C007B8D52 /* MMDragonPhrase.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4401E45428C007B8D52 /* MMDragonPhrase.m */; };
+		C527D4451E455B38007B8D52 /* MMPhraseDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4441E455B38007B8D52 /* MMPhraseDebugView.m */; };
+		C527D44A1E455BD1007B8D52 /* NSArray+MapReduce.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4471E455BD1007B8D52 /* NSArray+MapReduce.m */; };
+		C527D44B1E455BD1007B8D52 /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4491E455BD1007B8D52 /* NSArray+Helper.m */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -30,6 +33,12 @@
 		C527D43E1E4534DA007B8D52 /* MMDragonEarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonEarDelegate.h; sourceTree = "<group>"; };
 		C527D43F1E45428C007B8D52 /* MMDragonPhrase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonPhrase.h; sourceTree = "<group>"; };
 		C527D4401E45428C007B8D52 /* MMDragonPhrase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonPhrase.m; sourceTree = "<group>"; };
+		C527D4431E455B38007B8D52 /* MMPhraseDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPhraseDebugView.h; sourceTree = "<group>"; };
+		C527D4441E455B38007B8D52 /* MMPhraseDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPhraseDebugView.m; sourceTree = "<group>"; };
+		C527D4461E455BD1007B8D52 /* NSArray+MapReduce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MapReduce.h"; sourceTree = "<group>"; };
+		C527D4471E455BD1007B8D52 /* NSArray+MapReduce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MapReduce.m"; sourceTree = "<group>"; };
+		C527D4481E455BD1007B8D52 /* NSArray+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helper.h"; sourceTree = "<group>"; };
+		C527D4491E455BD1007B8D52 /* NSArray+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helper.m"; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +90,26 @@
 			name = DragonEar;
 			sourceTree = "<group>";
 		};
+		C527D4421E455B2A007B8D52 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				C527D4431E455B38007B8D52 /* MMPhraseDebugView.h */,
+				C527D4441E455B38007B8D52 /* MMPhraseDebugView.m */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
+		C527D44C1E455BD5007B8D52 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C527D4461E455BD1007B8D52 /* NSArray+MapReduce.h */,
+				C527D4471E455BD1007B8D52 /* NSArray+MapReduce.m */,
+				C527D4481E455BD1007B8D52 /* NSArray+Helper.h */,
+				C527D4491E455BD1007B8D52 /* NSArray+Helper.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		D34C17C01C948F5700D69BCA = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +131,8 @@
 		D34C17CB1C948F5700D69BCA /* Speech */ = {
 			isa = PBXGroup;
 			children = (
+				C527D44C1E455BD5007B8D52 /* Categories */,
+				C527D4421E455B2A007B8D52 /* Debug */,
 				C527D43D1E4533BA007B8D52 /* DragonEar */,
 				D34C17CF1C948F5700D69BCA /* AppDelegate.h */,
 				D34C17D01C948F5700D69BCA /* AppDelegate.m */,
@@ -261,11 +292,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C527D44A1E455BD1007B8D52 /* NSArray+MapReduce.m in Sources */,
 				D379BE381C99FEC70049D06F /* AudioController.m in Sources */,
 				C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */,
 				D392D9891C94938F002F5132 /* ViewController.m in Sources */,
+				C527D44B1E455BD1007B8D52 /* NSArray+Helper.m in Sources */,
 				D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */,
 				D34C17CE1C948F5700D69BCA /* main.m in Sources */,
+				C527D4451E455B38007B8D52 /* MMPhraseDebugView.m in Sources */,
 				C527D4411E45428C007B8D52 /* MMDragonPhrase.m in Sources */,
 				D3FFBC371C96208B00268A5F /* SpeechRecognitionService.m in Sources */,
 			);

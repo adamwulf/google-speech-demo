@@ -12,11 +12,15 @@
 
 @interface MMDragonPhrase : NSObject<NSSecureCoding>
 
--(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay andFlightDelay:(NSTimeInterval)flightDelay atTime:(NSTimeInterval)timeOfResponse;
+-(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay atTime:(NSTimeInterval)timestampOfResponse;
+
+-(void) updateWithSentDataTimestamp:(NSTimeInterval)timeOfSentData;
 
 @property (nonatomic, readonly, getter=isComplete) BOOL complete;
 @property (nonatomic, readonly) NSString *identifier;
 
 @property (nonatomic, readonly) StreamingRecognitionResult* bestResult;
+
+-(NSArray<NSDictionary*>*) debugEventData;
 
 @end

@@ -8,21 +8,16 @@
 
 #import "MMDragonPhrase.h"
 #import "SpeechRecognitionService.h"
+#import "NSArray+MapReduce.h"
 
 @implementation MMDragonPhrase{
-    NSMutableArray* _allResponses;
-    NSMutableArray* _allMicDelays;
-    NSMutableArray* _allFlightDelays;
-    NSMutableArray* _allResponseTimes;
+    NSMutableArray* _phraseEvents;
     NSTimeInterval _phraseStart;
 }
 
 -(instancetype) init{
     if(self = [super init]){
-        _allResponses = [NSMutableArray array];
-        _allMicDelays = [NSMutableArray array];
-        _allFlightDelays = [NSMutableArray array];
-        _allResponseTimes = [NSMutableArray array];
+        _phraseEvents = [NSMutableArray array];
         _identifier = [[NSUUID UUID] UUIDString];
         _phraseStart = [NSDate timeIntervalSinceReferenceDate];
     }
@@ -30,11 +25,51 @@
     return self;
 }
 
--(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay andFlightDelay:(NSTimeInterval)flightDelay atTime:(NSTimeInterval)timeOfResponse{
-    [_allResponses addObject:response];
-    [_allMicDelays addObject:@(micDelay)];
-    [_allFlightDelays addObject:@(flightDelay)];
-    [_allResponseTimes addObject:@(timeOfResponse)];
+-(NSArray<NSArray<NSDictionary*>*>*) responseAsDictionary:(StreamingRecognizeResponse*)response{
+    return [response.resultsArray map:^id(StreamingRecognitionResult *obj, NSUInteger index) {
+        return [obj.alternativesArray map:^id(SpeechRecognitionAlternative *obj, NSUInteger index) {
+            return @{ @"text" : obj.transcript, @"confidence" : @(obj.confidence) };
+        }];
+    }];
+}
+
+-(NSArray<NSDictionary*>*)debugEventData{
+    return [_phraseEvents map:^id(id obj, NSUInteger index) {
+        if(obj[@"response"]){
+            
+            NSMutableDictionary* mut = [obj mutableCopy];
+            
+            mut[@"response"] = [self responseAsDictionary:mut[@"response"]];
+            
+            return mut;
+        }
+        
+        return obj;
+    }];
+}
+
+-(void) updateWithStreamingResponse:(StreamingRecognizeResponse*)response withMicDelay:(NSTimeInterval)micDelay atTime:(NSTimeInterval)timestampOfResponse{
+    NSTimeInterval _mostRecentDataSent = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSDictionary* event in [_phraseEvents reverseObjectEnumerator]) {
+        if(event[@"timeOfSentData"]){
+            _mostRecentDataSent = [event[@"timeOfSentData"] doubleValue];
+            break;
+        }
+    }
+    
+    NSTimeInterval flightDelay = timestampOfResponse - _mostRecentDataSent;
+    
+    if([self isComplete]){
+        @throw [NSException exceptionWithName:@"MMDragonPhraseExceptoin" reason:@"cannot update complete phrase" userInfo:nil];
+    }
+    
+    [_phraseEvents addObject:@{
+                               @"response" : response,
+                               @"micDelay" : @(micDelay),
+                               @"flightDelay" : @(flightDelay),
+                               @"timestamp" : @(timestampOfResponse)
+                               }];
     
     for (StreamingRecognitionResult* result in response.resultsArray) {
         if(result.isFinal){
@@ -44,10 +79,22 @@
     }
 }
 
+-(void) updateWithSentDataTimestamp:(NSTimeInterval)timestampOfSentData{
+    [_phraseEvents addObject:@{
+                               @"timestamp" : @(timestampOfSentData)
+                               }];
+}
+
 -(StreamingRecognitionResult*) bestResult{
-    StreamingRecognizeResponse* recentResponse = [_allResponses lastObject];
-    
-    return [[recentResponse resultsArray] firstObject];
+    for (NSDictionary* event in [_phraseEvents reverseObjectEnumerator]) {
+        if(event[@"response"]){
+            StreamingRecognizeResponse* recentResponse = event[@"response"];
+            
+            return [[recentResponse resultsArray] firstObject];
+        }
+    }
+
+    return nil;
 }
 
 #pragma mark - NSSecureCoding
@@ -58,10 +105,7 @@
 
 -(instancetype) initWithCoder:(NSCoder *)aDecoder{
     if(self = [super init]){
-        _allResponses = [aDecoder decodeObjectOfClass:[NSMutableArray class] forKey:@"allResponses"];
-        _allMicDelays = [aDecoder decodeObjectOfClass:[NSMutableArray class] forKey:@"allMicDelays"];
-        _allFlightDelays = [aDecoder decodeObjectOfClass:[NSMutableArray class] forKey:@"allFlightDelays"];
-        _allResponseTimes = [aDecoder decodeObjectOfClass:[NSMutableArray class] forKey:@"allResponseTimes"];
+        _phraseEvents = [aDecoder decodeObjectOfClass:[NSMutableArray class] forKey:@"phraseEvents"];
         _identifier = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"identifier"];
         _phraseStart = [[aDecoder decodeObjectOfClass:[NSNumber class] forKey:@"phraseStart"] doubleValue];
     }
@@ -70,10 +114,7 @@
 }
 
 -(void) encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:_allResponses forKey:@"allResponses"];
-    [aCoder encodeObject:_allMicDelays forKey:@"allMicDelays"];
-    [aCoder encodeObject:_allFlightDelays forKey:@"allFlightDelays"];
-    [aCoder encodeObject:_allResponseTimes forKey:@"allResponseTimes"];
+    [aCoder encodeObject:_phraseEvents forKey:@"phraseEvents"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
     [aCoder encodeObject:@(_phraseStart) forKey:@"phraseStart"];
 }

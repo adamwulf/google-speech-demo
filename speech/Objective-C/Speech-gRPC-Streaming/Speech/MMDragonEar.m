@@ -83,12 +83,13 @@
     
     if ([self.audioData length] > chunk_size) {
         _mostRecentDataSent = [NSDate timeIntervalSinceReferenceDate];
+        
+        if(_inFlightPhrase){
+            [_inFlightPhrase updateWithSentDataTimestamp:_mostRecentDataSent];
+        }
+        
         [[SpeechRecognitionService sharedInstance] streamAudioData:self.audioData
                                                     withCompletion:^(BOOL didInitializeStream, StreamingRecognizeResponse *response, NSError *error) {
-                                                        NSTimeInterval end = [NSDate timeIntervalSinceReferenceDate];
-                                                        
-                                                        NSTimeInterval flightDelay = end - _mostRecentDataSent;
-                                                        
                                                         if (error) {
                                                             NSLog(@"ERROR: %@", error);
                                                             [[self delgate] dragonEar:self errorProcessingAudio:error];
@@ -99,7 +100,7 @@
                                                                 _inFlightPhrase = [[MMDragonPhrase alloc] init];
                                                             }
                                                             
-                                                            [_inFlightPhrase updateWithStreamingResponse:response withMicDelay:micDelay andFlightDelay:flightDelay atTime:[NSDate timeIntervalSinceReferenceDate]];
+                                                            [_inFlightPhrase updateWithStreamingResponse:response withMicDelay:micDelay atTime:[NSDate timeIntervalSinceReferenceDate]];
                                                             
                                                             [[self delgate] dragonEar:self didHearResponse:_inFlightPhrase];
 
