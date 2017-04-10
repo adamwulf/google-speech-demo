@@ -93,11 +93,7 @@
 
     MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
     
-    
-    
-    
-    
-    
+    NSLog(@"best phrase: %@", [graph bestPhrase]);
     
     // Drawing code
     NSDictionary* attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12] };

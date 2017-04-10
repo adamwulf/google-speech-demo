@@ -13,4 +13,6 @@
 
 -(instancetype) initWithResponses:(NSArray<NSDictionary*>*)responses;
 
+-(NSArray<MMDragonWord*>*) bestPhrase;
+
 @end

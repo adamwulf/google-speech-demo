@@ -39,11 +39,13 @@
 
                         return str;
                     }];
+                    [conciseResponses addObject:mutMoment];
                 }else{
                     foundFinal = YES;
                 }
+            }else{
+                [conciseResponses addObject:mutMoment];
             }
-            [conciseResponses addObject:mutMoment];
         }
         
         if(foundFinal){
@@ -119,7 +121,32 @@
         
         previousWord = nextWord;
     }
+}
+
+-(NSArray<MMDragonWord*>*) bestPhrase{
     
+    MMDragonWord*(^reduceToBestWord)(MMDragonWord*, NSUInteger, MMDragonWord*) = ^MMDragonWord*(MMDragonWord* obj, NSUInteger index, MMDragonWord* accum) {
+        if(!accum){
+            return obj;
+        }else if([[obj nextWords] count] > [[accum nextWords] count]){
+            return obj;
+        }
+        return accum;
+    };
+    
+    NSMutableArray<MMDragonWord*>* output = [NSMutableArray array];
+
+    if([startingWords count]){
+        MMDragonWord* bestWord = [startingWords reduce:reduceToBestWord];
+        [output addObject:bestWord];
+        
+        while ([[[output lastObject] nextWords] count]) {
+            bestWord = [[[output lastObject] nextWords] reduce:reduceToBestWord];
+            [output addObject:bestWord];
+        }
+    }
+    
+    return output;
 }
 
 @end
