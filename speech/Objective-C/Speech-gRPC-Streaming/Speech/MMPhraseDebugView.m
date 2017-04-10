@@ -9,6 +9,7 @@
 #import "MMPhraseDebugView.h"
 #import "NSArray+MapReduce.h"
 #import "NSArray+Helper.h"
+#import "MMDragonGraph.h"
 
 #define kRowHeight 20
 #define kWidthForTimestamp 80
@@ -86,6 +87,18 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
+    
+    
+    NSArray<NSDictionary*>* debugData = [[self phrase] debugEventData];
+
+    MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
+    
+    
+    
+    
+    
+    
+    
     // Drawing code
     NSDictionary* attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12] };
 
@@ -106,7 +119,6 @@
     
     
 
-    NSArray<NSDictionary*>* debugData = [[self phrase] debugEventData];
     NSTimeInterval startTimestamp = [[debugData firstObject][@"timestamp"] doubleValue];
     
     CGFloat y = 0;

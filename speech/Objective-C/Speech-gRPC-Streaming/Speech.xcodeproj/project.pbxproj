@@ -13,6 +13,8 @@
 		C527D4451E455B38007B8D52 /* MMPhraseDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4441E455B38007B8D52 /* MMPhraseDebugView.m */; };
 		C527D44A1E455BD1007B8D52 /* NSArray+MapReduce.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4471E455BD1007B8D52 /* NSArray+MapReduce.m */; };
 		C527D44B1E455BD1007B8D52 /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4491E455BD1007B8D52 /* NSArray+Helper.m */; };
+		C56A0C731E9C3EA50095A76D /* MMDragonWord.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C721E9C3EA50095A76D /* MMDragonWord.m */; };
+		C56A0C771E9C3F600095A76D /* MMDragonGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C761E9C3F600095A76D /* MMDragonGraph.m */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -39,6 +41,10 @@
 		C527D4471E455BD1007B8D52 /* NSArray+MapReduce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MapReduce.m"; sourceTree = "<group>"; };
 		C527D4481E455BD1007B8D52 /* NSArray+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helper.h"; sourceTree = "<group>"; };
 		C527D4491E455BD1007B8D52 /* NSArray+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helper.m"; sourceTree = "<group>"; };
+		C56A0C711E9C3EA50095A76D /* MMDragonWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonWord.h; sourceTree = "<group>"; };
+		C56A0C721E9C3EA50095A76D /* MMDragonWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonWord.m; sourceTree = "<group>"; };
+		C56A0C751E9C3F600095A76D /* MMDragonGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonGraph.h; sourceTree = "<group>"; };
+		C56A0C761E9C3F600095A76D /* MMDragonGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonGraph.m; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +116,17 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		C56A0C741E9C3F500095A76D /* WordGraph */ = {
+			isa = PBXGroup;
+			children = (
+				C56A0C751E9C3F600095A76D /* MMDragonGraph.h */,
+				C56A0C761E9C3F600095A76D /* MMDragonGraph.m */,
+				C56A0C711E9C3EA50095A76D /* MMDragonWord.h */,
+				C56A0C721E9C3EA50095A76D /* MMDragonWord.m */,
+			);
+			name = WordGraph;
+			sourceTree = "<group>";
+		};
 		D34C17C01C948F5700D69BCA = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +150,7 @@
 			children = (
 				C527D44C1E455BD5007B8D52 /* Categories */,
 				C527D4421E455B2A007B8D52 /* Debug */,
+				C56A0C741E9C3F500095A76D /* WordGraph */,
 				C527D43D1E4533BA007B8D52 /* DragonEar */,
 				D34C17CF1C948F5700D69BCA /* AppDelegate.h */,
 				D34C17D01C948F5700D69BCA /* AppDelegate.m */,
@@ -293,9 +311,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C527D44A1E455BD1007B8D52 /* NSArray+MapReduce.m in Sources */,
+				C56A0C731E9C3EA50095A76D /* MMDragonWord.m in Sources */,
 				D379BE381C99FEC70049D06F /* AudioController.m in Sources */,
 				C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */,
 				D392D9891C94938F002F5132 /* ViewController.m in Sources */,
+				C56A0C771E9C3F600095A76D /* MMDragonGraph.m in Sources */,
 				C527D44B1E455BD1007B8D52 /* NSArray+Helper.m in Sources */,
 				D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */,
 				D34C17CE1C948F5700D69BCA /* main.m in Sources */,

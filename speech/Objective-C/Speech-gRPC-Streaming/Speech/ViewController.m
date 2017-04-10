@@ -68,11 +68,10 @@
 }
 
 -(void) dragonEar:(MMDragonEar*)dragonEar didHearResponse:(MMDragonPhrase*)response{
-    NSLog(@"RESPONSE:");
-    NSLog(@" - result (%.2f, %d)", response.bestResult.stability, response.bestResult.isFinal);
-    SpeechRecognitionAlternative* alt = [response.bestResult.alternativesArray firstObject];
-
-    NSLog(@" - - alt (%.2f, %@)", alt.confidence, alt.transcript);
+//    NSLog(@"RESPONSE:");
+//    NSLog(@" - result (%.2f, %d)", response.bestResult.stability, response.bestResult.isFinal);
+//    SpeechRecognitionAlternative* alt = [response.bestResult.alternativesArray firstObject];
+//    NSLog(@" - - alt (%.2f, %@)", alt.confidence, alt.transcript);
 
     if([response isComplete]){
         

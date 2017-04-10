@@ -79,19 +79,22 @@
         @throw [NSException exceptionWithName:@"MMDragonPhraseExceptoin" reason:@"cannot update complete phrase" userInfo:nil];
     }
     
-    [_phraseEvents addObject:@{
-                               @"response" : response,
-                               @"micDelay" : @(micDelay),
-                               @"flightDelay" : @(flightDelay),
-                               @"timestamp" : @(timestampOfResponse)
-                               }];
-    
+    BOOL isFinal = NO;
     for (StreamingRecognitionResult* result in response.resultsArray) {
         if(result.isFinal){
+            isFinal = YES;
             _complete = YES;
             break;
         }
     }
+
+    [_phraseEvents addObject:@{
+                               @"response" : response,
+                               @"micDelay" : @(micDelay),
+                               @"flightDelay" : @(flightDelay),
+                               @"timestamp" : @(timestampOfResponse),
+                               @"isFinal" : @(isFinal)
+                               }];
 }
 
 -(void) updateWithSentDataTimestamp:(NSTimeInterval)timestampOfSentData{
@@ -147,5 +150,6 @@
     [aCoder encodeObject:_identifier forKey:@"identifier"];
     [aCoder encodeObject:@(_phraseStart) forKey:@"phraseStart"];
 }
+
 
 @end
