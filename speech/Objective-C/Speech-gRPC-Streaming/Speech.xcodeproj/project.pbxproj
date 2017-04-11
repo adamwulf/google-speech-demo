@@ -18,6 +18,7 @@
 		C56A0C7A1E9C61C60095A76D /* MMWordGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C791E9C61C60095A76D /* MMWordGraphView.m */; };
 		C56A0C851E9D546B0095A76D /* SpeechTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C841E9D546B0095A76D /* SpeechTests.m */; };
 		C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = C56A0C8C1E9D547C0095A76D /* coffee-test.plist */; };
+		C5FE132E1E9D5E220086E541 /* popsicles.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE132D1E9D5E220086E541 /* popsicles.plist */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		C56A0C841E9D546B0095A76D /* SpeechTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechTests.m; sourceTree = "<group>"; };
 		C56A0C861E9D546B0095A76D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C56A0C8C1E9D547C0095A76D /* coffee-test.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "coffee-test.plist"; sourceTree = "<group>"; };
+		C5FE132D1E9D5E220086E541 /* popsicles.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = popsicles.plist; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		C56A0C831E9D546B0095A76D /* SpeechTests */ = {
 			isa = PBXGroup;
 			children = (
+				C5FE132D1E9D5E220086E541 /* popsicles.plist */,
 				C56A0C8C1E9D547C0095A76D /* coffee-test.plist */,
 				C56A0C841E9D546B0095A76D /* SpeechTests.m */,
 				C56A0C861E9D546B0095A76D /* Info.plist */,
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */,
+				C5FE132E1E9D5E220086E541 /* popsicles.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +595,7 @@
 				C56A0C8B1E9D546B0095A76D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D34C17C41C948F5700D69BCA /* Build configuration list for PBXProject "Speech" */ = {
 			isa = XCConfigurationList;
