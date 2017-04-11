@@ -21,6 +21,8 @@
 
 @property (nonatomic, readonly) NSMutableArray<MMDragonWord*>* nextWords;
 
+-(MMDragonWord*) nextWordFor:(NSString*)stringWord;
+
 @property (nonatomic, readonly) NSInteger count;
 
 -(void) increment;

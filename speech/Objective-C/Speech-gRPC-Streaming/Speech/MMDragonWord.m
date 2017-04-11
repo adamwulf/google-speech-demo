@@ -39,6 +39,19 @@
     }
 }
 
+-(MMDragonWord*) nextWordFor:(NSString *)stringWord{
+    if(!stringWord){
+        return nil;
+    }
+    
+    for (MMDragonWord* child in [self nextWords]) {
+        if([[child word] isEqualToString:stringWord]){
+            return child;
+        }
+    }
+    return nil;
+}
+
 -(void)increment{
     _count += 1;
 }
