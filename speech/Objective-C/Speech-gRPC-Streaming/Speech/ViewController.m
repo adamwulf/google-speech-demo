@@ -40,6 +40,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
     
+    NSArray* arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSLog(@"documents directory: %@", arr[0]);
+    
     _debugView = [[MMPhraseDebugView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     _graphView = [[MMWordGraphView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     _graphView.hidden = YES;
@@ -48,6 +51,10 @@
     [_scrollView addSubview:_graphView];
     
     [[MMDragonEar sharedInstance] setDelgate:self];
+    
+    
+    MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:[arr[0] stringByAppendingPathComponent:@"2E2E12AD-89E2-44ED-BDCD-DD387A53A837.plist"]];
+    [self displayResponse:unarchivedResponse];
 }
 
 - (IBAction)recordAudio:(id)sender {
@@ -89,7 +96,6 @@
 //    NSLog(@" - - alt (%.2f, %@)", alt.confidence, alt.transcript);
 
     if([response isComplete]){
-        
         NSArray<NSString*>* userDocumentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString* docPath = [userDocumentsPaths objectAtIndex:0];
         NSString* outputFile = [[docPath stringByAppendingPathComponent:[response identifier]] stringByAppendingPathExtension:@"plist"];
@@ -101,12 +107,16 @@
         }
     }
     
+    [self displayResponse:response];
+}
+
+-(void) displayResponse:(MMDragonPhrase*)response{
     if([response hasResults]){
         [_debugView setPhrase:response];
         
         [_debugView setNeedsDisplay];
         [[_debugView superview] setNeedsLayout];
-
+        
         CGSize debugSize = [_debugView intrinsicContentSize];
         
         [_debugView setFrame:CGRectMake(0, 0, debugSize.width, debugSize.height)];
@@ -120,7 +130,7 @@
         CGSize graphSize = [_graphView intrinsicContentSize];
         
         [_graphView setFrame:CGRectMake(0, 0, graphSize.width, graphSize.height)];
-
+        
         [_scrollView setContentSize:CGSizeMake(MAX(debugSize.width, graphSize.width), MAX(debugSize.height, graphSize.height))];
     }
 }

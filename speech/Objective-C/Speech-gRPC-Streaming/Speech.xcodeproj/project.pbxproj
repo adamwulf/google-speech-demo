@@ -16,6 +16,8 @@
 		C56A0C731E9C3EA50095A76D /* MMDragonWord.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C721E9C3EA50095A76D /* MMDragonWord.m */; };
 		C56A0C771E9C3F600095A76D /* MMDragonGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C761E9C3F600095A76D /* MMDragonGraph.m */; };
 		C56A0C7A1E9C61C60095A76D /* MMWordGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C791E9C61C60095A76D /* MMWordGraphView.m */; };
+		C56A0C851E9D546B0095A76D /* SpeechTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C841E9D546B0095A76D /* SpeechTests.m */; };
+		C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = C56A0C8C1E9D547C0095A76D /* coffee-test.plist */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -25,6 +27,16 @@
 		D392D9891C94938F002F5132 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D392D9881C94938F002F5132 /* ViewController.m */; };
 		D3FFBC371C96208B00268A5F /* SpeechRecognitionService.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FFBC361C96208B00268A5F /* SpeechRecognitionService.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C56A0C871E9D546B0095A76D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D34C17C11C948F5700D69BCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D34C17C81C948F5700D69BCA;
+			remoteInfo = Speech;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		54C3D1E96C8C43AB14662311 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +60,10 @@
 		C56A0C761E9C3F600095A76D /* MMDragonGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonGraph.m; sourceTree = "<group>"; };
 		C56A0C781E9C61C60095A76D /* MMWordGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWordGraphView.h; sourceTree = "<group>"; };
 		C56A0C791E9C61C60095A76D /* MMWordGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWordGraphView.m; sourceTree = "<group>"; };
+		C56A0C821E9D546B0095A76D /* SpeechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C56A0C841E9D546B0095A76D /* SpeechTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechTests.m; sourceTree = "<group>"; };
+		C56A0C861E9D546B0095A76D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C56A0C8C1E9D547C0095A76D /* coffee-test.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "coffee-test.plist"; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +83,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C56A0C7F1E9D546B0095A76D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D34C17C61C948F5700D69BCA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,10 +155,21 @@
 			name = WordGraph;
 			sourceTree = "<group>";
 		};
+		C56A0C831E9D546B0095A76D /* SpeechTests */ = {
+			isa = PBXGroup;
+			children = (
+				C56A0C8C1E9D547C0095A76D /* coffee-test.plist */,
+				C56A0C841E9D546B0095A76D /* SpeechTests.m */,
+				C56A0C861E9D546B0095A76D /* Info.plist */,
+			);
+			path = SpeechTests;
+			sourceTree = "<group>";
+		};
 		D34C17C01C948F5700D69BCA = {
 			isa = PBXGroup;
 			children = (
 				D34C17CB1C948F5700D69BCA /* Speech */,
+				C56A0C831E9D546B0095A76D /* SpeechTests */,
 				D34C17CA1C948F5700D69BCA /* Products */,
 				F657FA334EB8D9ABF1ACF569 /* Pods */,
 				32C6BA1B2FA20A9904F13B95 /* Frameworks */,
@@ -146,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				D34C17C91C948F5700D69BCA /* Speech.app */,
+				C56A0C821E9D546B0095A76D /* SpeechTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +231,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C56A0C811E9D546B0095A76D /* SpeechTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C56A0C891E9D546B0095A76D /* Build configuration list for PBXNativeTarget "SpeechTests" */;
+			buildPhases = (
+				C56A0C7E1E9D546B0095A76D /* Sources */,
+				C56A0C7F1E9D546B0095A76D /* Frameworks */,
+				C56A0C801E9D546B0095A76D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C56A0C881E9D546B0095A76D /* PBXTargetDependency */,
+			);
+			name = SpeechTests;
+			productName = SpeechTests;
+			productReference = C56A0C821E9D546B0095A76D /* SpeechTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D34C17C81C948F5700D69BCA /* Speech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D34C17E01C948F5800D69BCA /* Build configuration list for PBXNativeTarget "Speech" */;
@@ -225,6 +278,12 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Google;
 				TargetAttributes = {
+					C56A0C811E9D546B0095A76D = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = MU27A4SCKC;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D34C17C81C948F5700D69BCA;
+					};
 					D34C17C81C948F5700D69BCA = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = MU27A4SCKC;
@@ -245,11 +304,20 @@
 			projectRoot = "";
 			targets = (
 				D34C17C81C948F5700D69BCA /* Speech */,
+				C56A0C811E9D546B0095A76D /* SpeechTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C56A0C801E9D546B0095A76D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D34C17C71C948F5700D69BCA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +379,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C56A0C7E1E9D546B0095A76D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C56A0C851E9D546B0095A76D /* SpeechTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D34C17C51C948F5700D69BCA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,6 +409,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C56A0C881E9D546B0095A76D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D34C17C81C948F5700D69BCA /* Speech */;
+			targetProxy = C56A0C871E9D546B0095A76D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		D34C17DA1C948F5800D69BCA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -345,6 +429,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C56A0C8A1E9D546B0095A76D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				INFOPLIST_FILE = SpeechTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.SpeechTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Speech.app/Speech";
+			};
+			name = Debug;
+		};
+		C56A0C8B1E9D546B0095A76D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				INFOPLIST_FILE = SpeechTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.SpeechTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Speech.app/Speech";
+			};
+			name = Release;
+		};
 		D34C17DE1C948F5800D69BCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -466,6 +584,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C56A0C891E9D546B0095A76D /* Build configuration list for PBXNativeTarget "SpeechTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C56A0C8A1E9D546B0095A76D /* Debug */,
+				C56A0C8B1E9D546B0095A76D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D34C17C41C948F5700D69BCA /* Build configuration list for PBXProject "Speech" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
