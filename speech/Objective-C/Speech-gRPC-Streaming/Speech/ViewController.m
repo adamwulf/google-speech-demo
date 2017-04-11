@@ -107,10 +107,9 @@
         [_debugView setNeedsDisplay];
         [[_debugView superview] setNeedsLayout];
 
-        CGSize size = [_debugView intrinsicContentSize];
+        CGSize debugSize = [_debugView intrinsicContentSize];
         
-        [_debugView setFrame:CGRectMake(0, 0, size.width, size.height)];
-        [_scrollView setContentSize:size];
+        [_debugView setFrame:CGRectMake(0, 0, debugSize.width, debugSize.height)];
         
         
         NSArray<NSDictionary*>* debugData = [response debugEventData];
@@ -118,9 +117,11 @@
         MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
         [_graphView setGraph:graph];
         
-        size = [_graphView intrinsicContentSize];
+        CGSize graphSize = [_graphView intrinsicContentSize];
         
-        [_graphView setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [_graphView setFrame:CGRectMake(0, 0, graphSize.width, graphSize.height)];
+
+        [_scrollView setContentSize:CGSizeMake(MAX(debugSize.width, graphSize.width), MAX(debugSize.height, graphSize.height))];
     }
 }
 

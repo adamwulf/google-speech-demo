@@ -25,6 +25,20 @@
     return self;
 }
 
+-(void) setStart:(NSTimeInterval)start{
+    _start = start;
+    if(self.start && self.stop && self.start > self.stop){
+        NSLog(@"gotcha");
+    }
+}
+
+-(void) setStop:(NSTimeInterval)stop{
+    _stop = stop;
+    if(self.start && self.stop && self.start > self.stop){
+        NSLog(@"gotcha");
+    }
+}
+
 -(void)increment{
     _count += 1;
 }

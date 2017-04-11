@@ -17,7 +17,7 @@
 @end
 
 @implementation MMDragonGraph{
-    NSMutableArray* wordsWithoutEnd;
+    NSMutableArray<MMDragonWord*>* wordsWithoutEnd;
 }
 
 -(instancetype) initWithResponses:(NSArray<NSDictionary*>*)responses{
@@ -63,6 +63,22 @@
         for (NSDictionary* moment in conciseResponses) {
             [self addMomentToGraph:moment];
         }
+        
+        
+        
+        NSLog(@"========================================");
+        NSLog(@"all words:");
+        
+        NSMutableArray* allWords = [[self startingWords] mutableCopy];
+        while ([allWords count]) {
+            MMDragonWord* word = [allWords firstObject];
+            
+            NSLog(@"%@  %.2f %.2f", word, word.start, word.stop);
+            
+            [allWords addObjectsFromArray:[word nextWords]];
+            [allWords removeObjectAtIndex:0];
+        }
+        
     }
     
     return self;
@@ -74,11 +90,12 @@
     for (MMDragonWord* word in wordsWithoutEnd) {
         word.stop = [moment[@"timestamp"] doubleValue];
     }
+    [wordsWithoutEnd removeAllObjects];
     
     if(![words count]){
-        [wordsWithoutEnd removeAllObjects];
         return;
     }
+    
     
     MMDragonWord* startingWord = [[self startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
         if(!accum && [[obj word] isEqualToString:words[0]]){

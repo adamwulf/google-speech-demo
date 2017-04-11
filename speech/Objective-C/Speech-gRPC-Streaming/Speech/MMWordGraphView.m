@@ -9,7 +9,8 @@
 #import "MMWordGraphView.h"
 #import "NSArray+MapReduce.h"
 
-#define kMargin 10
+#define kVertMargin 10
+#define kHorzMargin 40
 
 @implementation MMWordGraphView{
     CGFloat maxY;
@@ -45,8 +46,8 @@
     CGFloat maxWidth = 0;
     
     while ([wordsToLayout count]){
-        x += kMargin;
-        y += kMargin;
+        x += kHorzMargin;
+        y += kVertMargin;
         for (MMDragonWord* word in wordsToLayout) {
             UILabel* lbl = [[UILabel alloc] init];
             lbl.text = [word word];
@@ -56,13 +57,13 @@
             
             [labelsForWords addObject:@{@"word" : word, @"label" : lbl}];
             
-            y += CGRectGetHeight([lbl bounds]) + kMargin;
+            y += CGRectGetHeight([lbl bounds]) + kVertMargin;
             maxWidth = MAX(maxWidth, CGRectGetWidth([lbl bounds]));
             
             [nextWordsToLayout addObjectsFromArray:[word nextWords]];
         }
         
-        x += maxWidth + kMargin;
+        x += maxWidth + kHorzMargin;
         maxWidth = 0;
         y = 0;
         wordsToLayout = [nextWordsToLayout copy];
@@ -82,15 +83,24 @@
             }];
             
             UIBezierPath* path = [UIBezierPath bezierPath];
-            [path moveToPoint:CGPointMake(CGRectGetMaxX([wordLabel frame]), CGRectGetMidY([wordLabel frame]))];
-            [path addLineToPoint:CGPointMake(CGRectGetMinX([nextLabel frame]), CGRectGetMidY([nextLabel frame]))];
+            CGPoint startPoint = CGPointMake(CGRectGetMaxX([wordLabel frame]), CGRectGetMidY([wordLabel frame]));
+            CGPoint endPoint = CGPointMake(CGRectGetMinX([nextLabel frame]), CGRectGetMidY([nextLabel frame]));
+            [path moveToPoint:startPoint];
+            [path addLineToPoint:endPoint];
             
             CAShapeLayer* shapeLayer = [CAShapeLayer layer];
             [shapeLayer setPath:[path CGPath]];
             [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
             [shapeLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
             [shapeLayer setLineWidth:1];
-            [shapeLayer setStrokeColor:[[UIColor blackColor] CGColor]];
+            [shapeLayer setStrokeColor:[[UIColor lightGrayColor] CGColor]];
+
+            UILabel* timing = [[UILabel alloc] init];
+            [timing setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
+            [timing setText:[NSString stringWithFormat:@"%.3f", nextWord.start - word.stop]];
+            [timing sizeToFit];
+            timing.center = CGPointMake((endPoint.x + startPoint.x)/2, (endPoint.y + startPoint.y)/2);
+            [self addSubview:timing];
             
             [[self layer] addSublayer:shapeLayer];
             [sublayers addObject:shapeLayer];
