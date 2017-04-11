@@ -53,6 +53,7 @@
     MMDragonWord* word1 = [yeah nextWords][0];
     MMDragonWord* word2 = [yeah nextWords][1];
 
+    XCTAssertNotEqual([word1 start], 0);
     XCTAssertEqual([word1 start], [word2 start]);
     XCTAssertNotEqual([word1 stop], [word2 stop]);
 }

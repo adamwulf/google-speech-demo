@@ -19,7 +19,7 @@
 @property (nonatomic, assign) NSTimeInterval flightDelay;
 @property (nonatomic, strong) NSString* word;
 
-@property (nonatomic, readonly) NSMutableArray* nextWords;
+@property (nonatomic, readonly) NSMutableArray<MMDragonWord*>* nextWords;
 
 @property (nonatomic, readonly) NSInteger count;
 

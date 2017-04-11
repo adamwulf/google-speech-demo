@@ -107,11 +107,15 @@
         return accum;
     }];
     
-    MMDragonWord*(^createWordFor)(NSString* word) = ^(NSString* text){
+    MMDragonWord*(^createWordFor)(NSString*, MMDragonWord*) = ^(NSString* text, MMDragonWord* previousWord){
         MMDragonWord* word = [[MMDragonWord alloc] initWithWord:text];
         word.start = [moment[@"timestamp"] doubleValue];
         
-        if(lastOfLastWordWithoutEnd > 0){
+        if([previousWord.nextWords count]){
+            word.start = [[previousWord nextWords] reduceToFloat:^CGFloat(MMDragonWord* obj, NSUInteger index, CGFloat accum) {
+                return accum ? MIN([obj start], accum) : [obj start];
+            }];
+        }else if(lastOfLastWordWithoutEnd > 0){
             word.start = lastOfLastWordWithoutEnd;
         }
         
@@ -123,7 +127,7 @@
     
     
     if(!startingWord){
-        startingWord = createWordFor(words[0]);
+        startingWord = createWordFor(words[0], nil);
         [_startingWords addObject:startingWord];
     }else{
         [startingWord increment];
@@ -141,7 +145,7 @@
         }];
         
         if(!nextWord){
-            nextWord = createWordFor(words[i]);
+            nextWord = createWordFor(words[i], previousWord);
             [[previousWord nextWords] addObject:nextWord];
         }else{
             [nextWord increment];
