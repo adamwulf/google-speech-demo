@@ -107,7 +107,31 @@
         return accum;
     }];
     
-    MMDragonWord*(^createWordFor)(NSString*, MMDragonWord*) = ^(NSString* text, MMDragonWord* previousWord){
+    MMDragonWord*(^createWordFor)(NSString*, MMDragonWord*, MMDragonWord*) = ^(NSString* text, MMDragonWord* previousWord, MMDragonWord* previousFork){
+        // check if we've see this word before:
+        __block MMDragonWord*(^findPossibleWordFrom)(MMDragonWord*);
+        MMDragonWord* (^__block __weak weakFindPossibleWordFrom)(MMDragonWord*);
+        weakFindPossibleWordFrom = findPossibleWordFrom = ^MMDragonWord*(MMDragonWord* previousFork){
+            if([[previousFork word] isEqualToString:text]){
+                return previousFork;
+            }
+            for (MMDragonWord* childWord in [previousFork nextWords]) {
+                MMDragonWord* foundInChildren = weakFindPossibleWordFrom(childWord);
+                if(foundInChildren){
+                    return foundInChildren;
+                }
+            }
+            return nil;
+        };
+        
+        MMDragonWord* possiblySeen = findPossibleWordFrom(previousFork);
+        
+        if(possiblySeen){
+            return possiblySeen;
+        }
+    
+        
+        // if not, build a new word
         MMDragonWord* word = [[MMDragonWord alloc] initWithWord:text];
         word.start = [moment[@"timestamp"] doubleValue];
         
@@ -127,13 +151,14 @@
     
     
     if(!startingWord){
-        startingWord = createWordFor(words[0], nil);
+        startingWord = createWordFor(words[0], nil, nil);
         [_startingWords addObject:startingWord];
     }else{
         [startingWord increment];
     }
     
     MMDragonWord* previousWord = startingWord;
+    MMDragonWord* latestFork = startingWord;
     
     for (NSInteger i=1; i<[words count]; i++) {
         MMDragonWord* nextWord = [previousWord.nextWords reduce:^id(id obj, NSUInteger index, id accum) {
@@ -145,9 +170,10 @@
         }];
         
         if(!nextWord){
-            nextWord = createWordFor(words[i], previousWord);
+            nextWord = createWordFor(words[i], previousWord, latestFork);
             [[previousWord nextWords] addObject:nextWord];
         }else{
+            latestFork = nextWord;
             [nextWord increment];
         }
         

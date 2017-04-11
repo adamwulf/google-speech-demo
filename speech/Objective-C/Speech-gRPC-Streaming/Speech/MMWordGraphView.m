@@ -41,6 +41,15 @@
     NSMutableArray* nextWordsToLayout = [NSMutableArray array];
     NSArray* wordsToLayout = [graph startingWords];
     
+    UILabel*(^findLabelForWord)(MMDragonWord*) = ^UILabel*(MMDragonWord* word){
+        return [labelsForWords reduce:^id(NSDictionary* obj, NSUInteger index, id accum) {
+            if([obj[@"word"] isEqual:word]){
+                return obj[@"label"];
+            }
+            return accum;
+        }];
+    };
+    
     CGFloat y = 0;
     CGFloat x = 0;
     CGFloat maxWidth = 0;
@@ -49,15 +58,20 @@
         x += kHorzMargin;
         y += kVertMargin;
         for (MMDragonWord* word in wordsToLayout) {
-            UILabel* lbl = [[UILabel alloc] init];
-            lbl.text = [word word];
-            [lbl sizeToFit];
-            lbl.frame = CGRectMake(x, y, CGRectGetWidth([lbl bounds]), CGRectGetHeight([lbl bounds]));
-            [self addSubview:lbl];
+            
+            UILabel* lbl = findLabelForWord(word);
+            
+            if(!lbl){
+                lbl = [[UILabel alloc] init];
+                lbl.text = [word word];
+                [lbl sizeToFit];
+                lbl.frame = CGRectMake(x, y, CGRectGetWidth([lbl bounds]), CGRectGetHeight([lbl bounds]));
+                [self addSubview:lbl];
+                y += CGRectGetHeight([lbl bounds]) + kVertMargin;
+            }
             
             [labelsForWords addObject:@{@"word" : word, @"label" : lbl}];
             
-            y += CGRectGetHeight([lbl bounds]) + kVertMargin;
             maxWidth = MAX(maxWidth, CGRectGetWidth([lbl bounds]));
             
             [nextWordsToLayout addObjectsFromArray:[word nextWords]];
@@ -75,12 +89,7 @@
         UILabel* wordLabel = wordLbl[@"label"];
         
         for (MMDragonWord* nextWord in [word nextWords]) {
-            UILabel* nextLabel = [labelsForWords reduce:^id(NSDictionary* obj, NSUInteger index, id accum) {
-                if([obj[@"word"] isEqual:nextWord]){
-                    return obj[@"label"];
-                }
-                return accum;
-            }];
+            UILabel* nextLabel = findLabelForWord(nextWord);
             
             UIBezierPath* path = [UIBezierPath bezierPath];
             CGPoint startPoint = CGPointMake(CGRectGetMaxX([wordLabel frame]), CGRectGetMidY([wordLabel frame]));
