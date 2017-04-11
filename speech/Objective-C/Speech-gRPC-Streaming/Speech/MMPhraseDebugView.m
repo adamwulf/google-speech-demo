@@ -87,14 +87,9 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    
-    
+
     NSArray<NSDictionary*>* debugData = [[self phrase] debugEventData];
 
-    MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
-    
-    NSLog(@"best phrase: %@", [graph bestPhrase]);
-    
     // Drawing code
     NSDictionary* attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12] };
 

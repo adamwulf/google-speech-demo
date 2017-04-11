@@ -15,6 +15,7 @@
 		C527D44B1E455BD1007B8D52 /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C527D4491E455BD1007B8D52 /* NSArray+Helper.m */; };
 		C56A0C731E9C3EA50095A76D /* MMDragonWord.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C721E9C3EA50095A76D /* MMDragonWord.m */; };
 		C56A0C771E9C3F600095A76D /* MMDragonGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C761E9C3F600095A76D /* MMDragonGraph.m */; };
+		C56A0C7A1E9C61C60095A76D /* MMWordGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = C56A0C791E9C61C60095A76D /* MMWordGraphView.m */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -45,6 +46,8 @@
 		C56A0C721E9C3EA50095A76D /* MMDragonWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonWord.m; sourceTree = "<group>"; };
 		C56A0C751E9C3F600095A76D /* MMDragonGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDragonGraph.h; sourceTree = "<group>"; };
 		C56A0C761E9C3F600095A76D /* MMDragonGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDragonGraph.m; sourceTree = "<group>"; };
+		C56A0C781E9C61C60095A76D /* MMWordGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWordGraphView.h; sourceTree = "<group>"; };
+		C56A0C791E9C61C60095A76D /* MMWordGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWordGraphView.m; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 			children = (
 				C527D4431E455B38007B8D52 /* MMPhraseDebugView.h */,
 				C527D4441E455B38007B8D52 /* MMPhraseDebugView.m */,
+				C56A0C781E9C61C60095A76D /* MMWordGraphView.h */,
+				C56A0C791E9C61C60095A76D /* MMWordGraphView.m */,
 			);
 			name = Debug;
 			sourceTree = "<group>";
@@ -154,6 +159,8 @@
 				C527D43D1E4533BA007B8D52 /* DragonEar */,
 				D34C17CF1C948F5700D69BCA /* AppDelegate.h */,
 				D34C17D01C948F5700D69BCA /* AppDelegate.m */,
+				D392D9871C94938F002F5132 /* ViewController.h */,
+				D392D9881C94938F002F5132 /* ViewController.m */,
 				D34C17D81C948F5800D69BCA /* Assets.xcassets */,
 				D379BE361C99FEC70049D06F /* AudioController.h */,
 				D379BE371C99FEC70049D06F /* AudioController.m */,
@@ -163,8 +170,6 @@
 				D3FFBC351C96208B00268A5F /* SpeechRecognitionService.h */,
 				D3FFBC361C96208B00268A5F /* SpeechRecognitionService.m */,
 				D34C17CC1C948F5700D69BCA /* Supporting Files */,
-				D392D9871C94938F002F5132 /* ViewController.h */,
-				D392D9881C94938F002F5132 /* ViewController.m */,
 			);
 			path = Speech;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C527D44A1E455BD1007B8D52 /* NSArray+MapReduce.m in Sources */,
+				C56A0C7A1E9C61C60095A76D /* MMWordGraphView.m in Sources */,
 				C56A0C731E9C3EA50095A76D /* MMDragonWord.m in Sources */,
 				D379BE381C99FEC70049D06F /* AudioController.m in Sources */,
 				C527D43C1E4533B6007B8D52 /* MMDragonEar.m in Sources */,

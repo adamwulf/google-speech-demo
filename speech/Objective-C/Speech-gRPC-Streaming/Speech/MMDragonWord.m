@@ -7,6 +7,7 @@
 //
 
 #import "MMDragonWord.h"
+#import "NSArray+MapReduce.h"
 #import <CoreGraphics/CoreGraphics.h>
 
 @implementation MMDragonWord
@@ -28,8 +29,45 @@
     _count += 1;
 }
 
+-(NSInteger) depth{
+    return 1 + [[self nextWords] reduceToInteger:^NSInteger(MMDragonWord* obj, NSUInteger index, NSInteger accum) {
+        return MAX([obj depth], accum);
+    }];
+}
+
 -(NSString*)description{
     return [NSString stringWithFormat:@"[MMDragonWord %@ %ld]", _word, (long)_count];
+}
+
+#pragma mark - NSCopying
+
+
+- (id)copyWithZone:(NSZone *)zone {
+    MMDragonWord *copiedWord = [[[self class] allocWithZone:zone] initWithWord:[self word]];
+    
+    copiedWord.start = self.start;
+    copiedWord.stop = self.stop;
+    copiedWord.micDelay = self.micDelay;
+    copiedWord.flightDelay = self.flightDelay;
+    
+    [copiedWord.nextWords addObjectsFromArray:[[NSArray alloc] initWithArray:[self nextWords] copyItems:YES]];
+    
+    for (NSInteger i=0; i<[self count]; i++) {
+        [copiedWord increment];
+    }
+
+    return copiedWord;
+}
+
+-(NSUInteger) hash{
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + self.start;
+    result = prime * result + self.stop;
+    result = prime * result + self.micDelay;
+    result = prime * result + self.flightDelay;
+    result = prime * result + [self.word hash];
+    return result;
 }
 
 @end

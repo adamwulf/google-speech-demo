@@ -13,6 +13,8 @@
 
 -(instancetype) initWithResponses:(NSArray<NSDictionary*>*)responses;
 
+@property (nonatomic, readonly) NSArray* startingWords;
+
 -(NSArray<MMDragonWord*>*) bestPhrase;
 
 @end

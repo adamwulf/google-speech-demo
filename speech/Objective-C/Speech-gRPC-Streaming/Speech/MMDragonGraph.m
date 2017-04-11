@@ -10,8 +10,13 @@
 #import "MMDragonWord.h"
 #import "NSArray+MapReduce.h"
 
+@interface MMDragonGraph ()
+
+@property (nonatomic, strong) NSMutableArray* startingWords;
+
+@end
+
 @implementation MMDragonGraph{
-    NSMutableArray* startingWords;
     NSMutableArray* wordsWithoutEnd;
 }
 
@@ -19,7 +24,7 @@
     if(self = [super init]){
         
         wordsWithoutEnd = [NSMutableArray array];
-        startingWords = [NSMutableArray array];
+        _startingWords = [NSMutableArray array];
         NSMutableArray* conciseResponses = [NSMutableArray array];
         
         BOOL foundFinal = NO;
@@ -66,23 +71,22 @@
 -(void) addMomentToGraph:(NSDictionary*)moment{
     NSArray* words = [moment[@"response"] componentsSeparatedByString:@" "];
     
+    for (MMDragonWord* word in wordsWithoutEnd) {
+        word.stop = [moment[@"timestamp"] doubleValue];
+    }
+    
     if(![words count]){
-        for (MMDragonWord* word in wordsWithoutEnd) {
-            word.stop = [moment[@"timestamp"] doubleValue];
-        }
         [wordsWithoutEnd removeAllObjects];
         return;
     }
     
-    MMDragonWord* startingWord = [startingWords reduce:^id(id obj, NSUInteger index, id accum) {
+    MMDragonWord* startingWord = [[self startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
         if(!accum && [[obj word] isEqualToString:words[0]]){
             return obj;
         }
         
         return accum;
     }];
-    
-    
     
     MMDragonWord*(^createWordFor)(NSString* word) = ^(NSString* text){
         MMDragonWord* word = [[MMDragonWord alloc] initWithWord:text];
@@ -96,7 +100,7 @@
     
     if(!startingWord){
         startingWord = createWordFor(words[0]);
-        [startingWords addObject:startingWord];
+        [_startingWords addObject:startingWord];
     }else{
         [startingWord increment];
     }
@@ -136,8 +140,8 @@
     
     NSMutableArray<MMDragonWord*>* output = [NSMutableArray array];
 
-    if([startingWords count]){
-        MMDragonWord* bestWord = [startingWords reduce:reduceToBestWord];
+    if([_startingWords count]){
+        MMDragonWord* bestWord = [_startingWords reduce:reduceToBestWord];
         [output addObject:bestWord];
         
         while ([[[output lastObject] nextWords] count]) {

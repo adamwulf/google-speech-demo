@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MMDragonWord : NSObject
+@interface MMDragonWord : NSObject<NSCopying>
 
 -(instancetype) init NS_UNAVAILABLE;
 -(instancetype) initWithWord:(NSString*)word;
@@ -24,5 +24,6 @@
 @property (nonatomic, readonly) NSInteger count;
 
 -(void) increment;
+-(NSInteger) depth;
 
 @end

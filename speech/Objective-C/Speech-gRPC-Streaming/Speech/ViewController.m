@@ -24,11 +24,13 @@
 #import "MMDragonPhrase.h"
 #import "MMDragonEarDelegate.h"
 #import "MMPhraseDebugView.h"
+#import "MMWordGraphView.h"
 
 #define SAMPLE_RATE 16000.0f
 
 @interface ViewController () <MMDragonEarDelegate>
 @property (nonatomic, strong) MMPhraseDebugView *debugView;
+@property (nonatomic, strong) MMWordGraphView *graphView;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableData *audioData;
 @end
@@ -39,8 +41,11 @@
   [super viewDidLoad];
     
     _debugView = [[MMPhraseDebugView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    _graphView = [[MMWordGraphView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    _graphView.hidden = YES;
     
     [_scrollView addSubview:_debugView];
+    [_scrollView addSubview:_graphView];
     
     [[MMDragonEar sharedInstance] setDelgate:self];
 }
@@ -51,6 +56,16 @@
 
 - (IBAction)stopAudio:(id)sender {
     [[MMDragonEar sharedInstance] setListening:NO];
+}
+
+-(IBAction) viewToggleChangedValue:(UISegmentedControl*)sender{
+    if(sender.selectedSegmentIndex == 0){
+        _debugView.hidden = NO;
+        _graphView.hidden = YES;
+    }else{
+        _debugView.hidden = YES;
+        _graphView.hidden = NO;
+    }
 }
 
 #pragma mark - MMDragonEarDelegate
@@ -96,6 +111,16 @@
         
         [_debugView setFrame:CGRectMake(0, 0, size.width, size.height)];
         [_scrollView setContentSize:size];
+        
+        
+        NSArray<NSDictionary*>* debugData = [response debugEventData];
+        
+        MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
+        [_graphView setGraph:graph];
+        
+        size = [_graphView intrinsicContentSize];
+        
+        [_graphView setFrame:CGRectMake(0, 0, size.width, size.height)];
     }
 }
 
