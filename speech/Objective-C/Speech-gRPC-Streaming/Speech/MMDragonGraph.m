@@ -113,6 +113,19 @@
         MMDragonWord* (^__block __weak weakFindPossibleWordFrom)(MMDragonWord*);
         weakFindPossibleWordFrom = findPossibleWordFrom = ^MMDragonWord*(MMDragonWord* previousFork){
             if([[previousFork word] isEqualToString:text]){
+                // ensure that the previous word doesn't appear
+                // in our found word's future
+                // TODO: find a test case for this
+                NSMutableArray* wordsToCheck = [NSMutableArray arrayWithObject:previousFork];
+                while([wordsToCheck count]){
+                    MMDragonWord* wordToCheck = [wordsToCheck firstObject];
+                    if([wordToCheck isEqual:previousWord]){
+                        return nil;
+                    }
+                    [wordsToCheck removeObjectAtIndex:0];
+                    [wordsToCheck addObjectsFromArray:[wordToCheck nextWords]];
+                }
+                
                 return previousFork;
             }
             for (MMDragonWord* childWord in [previousFork nextWords]) {
@@ -129,7 +142,6 @@
         if(possiblySeen){
             return possiblySeen;
         }
-    
         
         // if not, build a new word
         MMDragonWord* word = [[MMDragonWord alloc] initWithWord:text];
