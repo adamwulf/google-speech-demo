@@ -90,12 +90,14 @@
     for (MMDragonWord* word in wordsWithoutEnd) {
         word.stop = [moment[@"timestamp"] doubleValue];
     }
-    [wordsWithoutEnd removeAllObjects];
     
     if(![words count]){
+        [wordsWithoutEnd removeAllObjects];
         return;
     }
     
+    CGFloat lastOfLastWordWithoutEnd = [[wordsWithoutEnd lastObject] start];
+    [wordsWithoutEnd removeAllObjects];
     
     MMDragonWord* startingWord = [[self startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
         if(!accum && [[obj word] isEqualToString:words[0]]){
@@ -108,6 +110,11 @@
     MMDragonWord*(^createWordFor)(NSString* word) = ^(NSString* text){
         MMDragonWord* word = [[MMDragonWord alloc] initWithWord:text];
         word.start = [moment[@"timestamp"] doubleValue];
+        
+        if(lastOfLastWordWithoutEnd > 0){
+            word.start = lastOfLastWordWithoutEnd;
+        }
+        
         word.micDelay = [moment[@"micDelay"] doubleValue];
         word.flightDelay = [moment[@"flightDelay"] doubleValue];
         [wordsWithoutEnd addObject:word];
