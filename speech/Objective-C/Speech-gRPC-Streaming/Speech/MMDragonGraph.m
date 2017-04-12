@@ -65,7 +65,23 @@
         }
         
         
+        // make sure timings of words don't overlap
+        NSMutableArray* wordsToValidate = [NSMutableArray arrayWithArray:[self startingWords]];
         
+        while([wordsToValidate count]){
+            MMDragonWord* firstWord = [wordsToValidate firstObject];
+            for (MMDragonWord* secondWord in firstWord.nextWords) {
+                if([firstWord stop] >= [secondWord start]){
+                    NSTimeInterval mid = ([firstWord stop] + [secondWord start]) / 2.0;
+                    [firstWord setStop:mid];
+                    [secondWord setStart:mid];
+                }
+            }
+            
+            [wordsToValidate removeObjectAtIndex:0];
+            [wordsToValidate addObjectsFromArray:[firstWord nextWords]];
+        }
+
         NSLog(@"========================================");
         NSLog(@"all words:");
         
@@ -137,10 +153,15 @@
             return nil;
         };
         
-        MMDragonWord* possiblySeen = findPossibleWordFrom(previousFork);
-        
-        if(possiblySeen){
-            return possiblySeen;
+        if(previousFork){
+            NSArray* previousToCheck = [_startingWords containsObject:previousFork] ? _startingWords : @[previousFork];
+            for (MMDragonWord* previousForkStart in previousToCheck) {
+                MMDragonWord* possiblySeen = findPossibleWordFrom(previousForkStart);
+                
+                if(possiblySeen){
+                    return possiblySeen;
+                }
+            }
         }
         
         // if not, build a new word

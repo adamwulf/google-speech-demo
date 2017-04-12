@@ -188,4 +188,36 @@
 }
 
 
+- (void)testEarlyForkMerge {
+    // Test to make sure that introducing two word phrase will adjust the start
+    // of the 2nd word in that phrase
+    NSString* path = [[NSBundle bundleForClass:[self class]] pathForResource:@"duplicate-start" ofType:@"plist"];
+    MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    
+    NSArray<NSDictionary*>* debugData = [unarchivedResponse debugEventData];
+    MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:debugData];
+    
+    NSArray<NSString*>* strWords = [[graph startingWords] mapWithSelector:@selector(word)];
+    
+    XCTAssertTrue([strWords containsObject:@"why"], @"contains correct word");
+    XCTAssertTrue([strWords containsObject:@"Why"], @"contains correct word");
+    
+    MMDragonWord* why = [[graph startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
+        return [[obj word] isEqualToString:@"why"] ? obj : accum;
+    }];
+
+    MMDragonWord* Why = [[graph startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
+        return [[obj word] isEqualToString:@"Why"] ? obj : accum;
+    }];
+    
+    XCTAssertNotNil(why);
+    XCTAssertNotNil(Why);
+    
+    XCTAssertNotNil([why nextWordFor:@"did"]);
+    XCTAssertNotNil([Why nextWordFor:@"did"]);
+    
+    // not just equal in values, but physically the same object
+    XCTAssertEqual([why nextWordFor:@"did"], [Why nextWordFor:@"did"]);
+}
+
 @end
