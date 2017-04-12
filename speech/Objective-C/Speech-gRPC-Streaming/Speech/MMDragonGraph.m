@@ -28,6 +28,7 @@
         NSMutableArray* conciseResponses = [NSMutableArray array];
         
         BOOL foundFinal = NO;
+        CGFloat finalTimestamp = CGFLOAT_MAX;
         
         for (NSDictionary* moment in responses) {
             NSMutableDictionary* mutMoment = [moment mutableCopy];
@@ -46,25 +47,34 @@
                     }];
                     [conciseResponses addObject:mutMoment];
                 }else{
+                    if([moment[@"response"] count]){
+                        NSArray<NSDictionary*>* response = moment[@"response"][0];
+                        if([response count]){
+                            mutMoment[@"response"] = response[0][@"text"];
+                            [conciseResponses addObject:mutMoment];
+                        }
+                    }
                     foundFinal = YES;
                 }
             }else{
                 [conciseResponses addObject:mutMoment];
             }
+            
+            if(moment[@"timestamp"]){
+                finalTimestamp = [moment[@"timestamp"] doubleValue];
+            }
         }
-        
-        if(foundFinal){
-            NSLog(@"found final");
-        }
-        NSLog(@"========================================");
-        NSLog(@"build graph for: %@", conciseResponses);
-        
         
         for (NSDictionary* moment in conciseResponses) {
             [self addMomentToGraph:moment];
         }
         
+        for (MMDragonWord* word in wordsWithoutEnd) {
+            word.stop = finalTimestamp;
+        }
+        [wordsWithoutEnd removeAllObjects];
         
+
         // make sure timings of words don't overlap
         NSMutableArray* wordsToValidate = [NSMutableArray arrayWithArray:[self startingWords]];
         
