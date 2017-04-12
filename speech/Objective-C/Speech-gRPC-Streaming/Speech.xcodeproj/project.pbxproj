@@ -20,6 +20,11 @@
 		C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = C56A0C8C1E9D547C0095A76D /* coffee-test.plist */; };
 		C5FE132E1E9D5E220086E541 /* popsicles.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE132D1E9D5E220086E541 /* popsicles.plist */; };
 		C5FE13301E9DC1110086E541 /* duplicate-start.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE132F1E9DC1110086E541 /* duplicate-start.plist */; };
+		C5FE13321E9DCC7F0086E541 /* merge-forks.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE13311E9DCC7F0086E541 /* merge-forks.plist */; };
+		C5FE13331E9DCE4D0086E541 /* merge-forks.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE13311E9DCC7F0086E541 /* merge-forks.plist */; };
+		C5FE13341E9DCE4D0086E541 /* duplicate-start.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE132F1E9DC1110086E541 /* duplicate-start.plist */; };
+		C5FE13351E9DCE4D0086E541 /* popsicles.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5FE132D1E9D5E220086E541 /* popsicles.plist */; };
+		C5FE13361E9DCE4D0086E541 /* coffee-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = C56A0C8C1E9D547C0095A76D /* coffee-test.plist */; };
 		D34C17CE1C948F5700D69BCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17CD1C948F5700D69BCA /* main.m */; };
 		D34C17D11C948F5700D69BCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C17D01C948F5700D69BCA /* AppDelegate.m */; };
 		D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34C17D81C948F5800D69BCA /* Assets.xcassets */; };
@@ -68,6 +73,7 @@
 		C56A0C8C1E9D547C0095A76D /* coffee-test.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "coffee-test.plist"; sourceTree = "<group>"; };
 		C5FE132D1E9D5E220086E541 /* popsicles.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = popsicles.plist; sourceTree = "<group>"; };
 		C5FE132F1E9DC1110086E541 /* duplicate-start.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "duplicate-start.plist"; sourceTree = "<group>"; };
+		C5FE13311E9DCC7F0086E541 /* merge-forks.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "merge-forks.plist"; sourceTree = "<group>"; };
 		D34C17C91C948F5700D69BCA /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34C17CD1C948F5700D69BCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D34C17CF1C948F5700D69BCA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -162,6 +168,7 @@
 		C56A0C831E9D546B0095A76D /* SpeechTests */ = {
 			isa = PBXGroup;
 			children = (
+				C5FE13311E9DCC7F0086E541 /* merge-forks.plist */,
 				C5FE132F1E9DC1110086E541 /* duplicate-start.plist */,
 				C5FE132D1E9D5E220086E541 /* popsicles.plist */,
 				C56A0C8C1E9D547C0095A76D /* coffee-test.plist */,
@@ -321,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C56A0C8D1E9D547C0095A76D /* coffee-test.plist in Resources */,
+				C5FE13321E9DCC7F0086E541 /* merge-forks.plist in Resources */,
 				C5FE13301E9DC1110086E541 /* duplicate-start.plist in Resources */,
 				C5FE132E1E9D5E220086E541 /* popsicles.plist in Resources */,
 			);
@@ -331,7 +339,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D392D9861C94937D002F5132 /* Main.storyboard in Resources */,
+				C5FE13331E9DCE4D0086E541 /* merge-forks.plist in Resources */,
+				C5FE13361E9DCE4D0086E541 /* coffee-test.plist in Resources */,
 				D34C17DC1C948F5800D69BCA /* LaunchScreen.storyboard in Resources */,
+				C5FE13351E9DCE4D0086E541 /* popsicles.plist in Resources */,
+				C5FE13341E9DCE4D0086E541 /* duplicate-start.plist in Resources */,
 				D34C17D91C948F5800D69BCA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

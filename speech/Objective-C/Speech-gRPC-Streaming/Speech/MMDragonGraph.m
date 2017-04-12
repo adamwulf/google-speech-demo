@@ -172,7 +172,13 @@
                 MMDragonWord* possiblySeen = findPossibleWordFrom(previousForkStart);
                 
                 if(possiblySeen){
-                    return possiblySeen;
+                    if([possiblySeen stop] < [previousWord start]){
+                        // don't allow us to loop backward in time.
+                        // if we have a stop timestamp, then
+                        // this definitely isn't our word.
+                    }else{
+                        return possiblySeen;
+                    }
                 }
             }
         }

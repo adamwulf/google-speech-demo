@@ -52,8 +52,12 @@
     
     [[MMDragonEar sharedInstance] setDelgate:self];
     
+    NSString* filename = @"merge-forks.plist";
     
-    MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:[arr[0] stringByAppendingPathComponent:@"00EDA127-09EA-4BB0-9422-97B1CB997F15.plist"]];
+    MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:[arr[0] stringByAppendingPathComponent:filename]];
+    if(!unarchivedResponse){
+        unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:filename ofType:nil]];
+    }
     [self displayResponse:unarchivedResponse];
 }
 

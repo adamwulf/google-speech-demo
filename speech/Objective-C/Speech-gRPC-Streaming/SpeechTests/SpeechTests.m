@@ -220,4 +220,36 @@
     XCTAssertEqual([why nextWordFor:@"did"], [Why nextWordFor:@"did"]);
 }
 
+
+- (void)testMergeForks {
+    // Test that the "and" and "in" after award merge together afterwards
+    // in the merge-forks.plist test case
+    NSString* path = [[NSBundle bundleForClass:[self class]] pathForResource:@"merge-forks" ofType:@"plist"];
+    MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:[unarchivedResponse debugEventData]];
+    
+    NSArray<NSString*>* strWords = [[graph startingWords] mapWithSelector:@selector(word)];
+    
+    XCTAssertEqual([[graph startingWords] count], 2);
+    XCTAssertTrue([strWords containsObject:@"yeah"], @"contains yeah");
+    XCTAssertTrue([strWords containsObject:@"Yucca"], @"contains yeah");
+    
+    MMDragonWord* yeah = [[graph startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
+        return [[obj word] isEqualToString:@"yeah"] ? obj : accum;
+    }];
+    
+    XCTAssertEqual([[yeah nextWords] count], 2);
+    
+    strWords = [[yeah nextWords] mapWithSelector:@selector(word)];
+    XCTAssertTrue([strWords containsObject:@"cause"], @"contains yeah");
+    XCTAssertTrue([strWords containsObject:@"coffee"], @"contains yeah");
+    
+    MMDragonWord* word1 = [yeah nextWords][0];
+    MMDragonWord* word2 = [yeah nextWords][1];
+    
+    XCTAssertNotEqual([word1 start], 0);
+    XCTAssertEqual([word1 start], [word2 start]);
+    XCTAssertNotEqual([word1 stop], [word2 stop]);
+}
+
 @end
