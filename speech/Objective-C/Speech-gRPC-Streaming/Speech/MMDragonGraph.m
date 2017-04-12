@@ -66,6 +66,9 @@
         }
         
         for (NSDictionary* moment in conciseResponses) {
+            if(moment == [conciseResponses lastObject]){
+                NSLog(@"break");
+            }
             [self addMomentToGraph:moment];
         }
         
@@ -216,7 +219,11 @@
             nextWord = createWordFor(words[i], previousWord, latestFork);
             [[previousWord nextWords] addObject:nextWord];
         }else{
-            latestFork = nextWord;
+            if(!latestFork || [[nextWord nextWords] count] > 1){
+                // make sure to use only forking words
+                // as the last fork.
+                latestFork = nextWord;
+            }
             [nextWord increment];
         }
         
