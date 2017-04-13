@@ -113,6 +113,19 @@
     return self;
 }
 
+-(MMDragonWord*) startingWordFor:(NSString*)stringWord{
+    if(!stringWord){
+        return nil;
+    }
+    
+    for (MMDragonWord* child in [self startingWords]) {
+        if([[child word] isEqualToString:stringWord]){
+            return child;
+        }
+    }
+    return nil;
+}
+
 -(void) addMomentToGraph:(NSDictionary*)moment{
     NSArray* words = [moment[@"response"] componentsSeparatedByString:@" "];
     

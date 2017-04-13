@@ -227,29 +227,27 @@
     NSString* path = [[NSBundle bundleForClass:[self class]] pathForResource:@"merge-forks" ofType:@"plist"];
     MMDragonPhrase* unarchivedResponse = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     MMDragonGraph* graph = [[MMDragonGraph alloc] initWithResponses:[unarchivedResponse debugEventData]];
+        
+    MMDragonWord* word = [graph startingWordFor:@"Nicki"];
+    word = [word nextWordFor:@"Minaj"];
+    word = [word nextWordFor:@"Captain's"];
+    word = [word nextWordFor:@"trophy"];
+    word = [word nextWordFor:@"is"];
+    MMDragonWord* in1 = [word nextWordFor:@"in"];
+    word = [word nextWordFor:@"an"];
+    word = [word nextWordFor:@"award"];
+    MMDragonWord* in2 = [word nextWordFor:@"in"];
+    MMDragonWord* the1 = [in2 nextWordFor:@"the"];
+    MMDragonWord* and = [word nextWordFor:@"and"];
+    MMDragonWord* the2 = [and nextWordFor:@"the"];
     
-    NSArray<NSString*>* strWords = [[graph startingWords] mapWithSelector:@selector(word)];
+    XCTAssertNotNil(the1, @"found word");
+    XCTAssertNotNil(the2, @"found word");
+    XCTAssertEqual(the1, the2, @"exact same object");
     
-    XCTAssertEqual([[graph startingWords] count], 2);
-    XCTAssertTrue([strWords containsObject:@"yeah"], @"contains yeah");
-    XCTAssertTrue([strWords containsObject:@"Yucca"], @"contains yeah");
-    
-    MMDragonWord* yeah = [[graph startingWords] reduce:^id(id obj, NSUInteger index, id accum) {
-        return [[obj word] isEqualToString:@"yeah"] ? obj : accum;
-    }];
-    
-    XCTAssertEqual([[yeah nextWords] count], 2);
-    
-    strWords = [[yeah nextWords] mapWithSelector:@selector(word)];
-    XCTAssertTrue([strWords containsObject:@"cause"], @"contains yeah");
-    XCTAssertTrue([strWords containsObject:@"coffee"], @"contains yeah");
-    
-    MMDragonWord* word1 = [yeah nextWords][0];
-    MMDragonWord* word2 = [yeah nextWords][1];
-    
-    XCTAssertNotEqual([word1 start], 0);
-    XCTAssertEqual([word1 start], [word2 start]);
-    XCTAssertNotEqual([word1 stop], [word2 stop]);
+    XCTAssertNotNil(in1, @"found word");
+    XCTAssertNotNil(in2, @"found word");
+    XCTAssertNotEqual(in1, in2, @"exact same object");
 }
 
 @end
